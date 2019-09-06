@@ -1,27 +1,48 @@
+// import { setupMaster } from "cluster";
+
 console.log('js');
 
 $( document ).ready( onReady );
 
 function onReady(){
-    $( '#addBtn' ).on( 'click', bodyInput );
-    $( '#minusBtn' ).on( 'click', bodyInput );
-    $( '#timesBtn' ).on( 'click', bodyInput );
-    $( '#divideBtn' ).on( 'click', bodyInput );
-    $( '#equalBtn' ).on( 'click', bodyInput );
-    $( '#refreshBtn' ).on( 'click', bodyInput );
+    $( '#addBtn' ).on( 'click', add );
+    $( '#minusBtn' ).on( 'click', minus );
+    $( '#timesBtn' ).on( 'click', times );
+    $( '#divideBtn' ).on( 'click', divide );
+    // $( '#equalBtn' ).on( 'click', bodyInput );
+    // $( '#refreshBtn' ).on( 'click', refresh );
     getNumbers();
+}
 
+function add(num1, num2){
+    $( '#equalBtn' ).on( 'click', bodyInput );
+   return num1 + num2;
+}
+
+function minus(num1, num2){
+    $( '#equalBtn' ).on( 'click', bodyInput );
+   return num1 - num2;
+}
+
+function times(num1, num2){
+    $( '#equalBtn' ).on( 'click', bodyInput );
+   return num1 * num2;
+}
+
+function divide(num1, num2){
+    $( '#equalBtn' ).on( 'click', bodyInput );
+   return num1 / num2;
 }
 
 function bodyInput(){
-    let objectToSend = {
-        first: $( '#firstN' ).val(),
-        second: $( '#secondN' ).val()
+    let numbers = {
+        num1: $( '#firstN' ).val(),
+        num2: $( '#secondN' ).val()
     }
     $.ajax({
         type: 'POST',
-        url: '/cal',
-        data: objectToSend
+        url: '/numbers',
+        data: numbers
     }).then( function( response ){
         console.log( 'back from server with:', response );
         getNumbers();
@@ -36,7 +57,7 @@ function getNumbers(){
     // use AJAX to make a GET request
     $.ajax({
         type: 'GET', 
-        url: '/cal'
+        url: '/numbers'
     }).then( function( response ){
         // console log out response
         console.log( 'back from server with:', response );
@@ -45,12 +66,12 @@ function getNumbers(){
         el.empty();
         for( let i = 0; i< response.length; i++){
             el.append( `
-            <li>${response[i].first}</li>
-            <li>${response[i].second}</li>`
+            <li>${response[i].num1}</li>
+            <li>${response[i].num2}</li>`
             );
         } // end loop
     }).catch( function( err ){
         // catch errors here
         alert( err ); 
     }) // end catch
-} // end getThings
+} // end getNumbers
