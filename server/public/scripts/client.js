@@ -68,7 +68,6 @@ function displayProblems() {
         for( let item of response){
             el.append( '<li>' + item.num1 + ' ' + item.operator + ' ' + item.num2 + '</li>');
         }
-        console.log(el); 
         // end loop
     }).catch( function( err ){
         // catch errors here
@@ -78,16 +77,18 @@ function displayProblems() {
 
 function clearInputs() {
     console.log('in clearInputs,');
-  $.ajax({
-    method: 'GET',
-    url: '/clearInput'
-  }).then(function (response) {
-      console.log(response);
     $('.num1').val('');
     $('.num2').val('');
-  }).catch(function (err) {
-    alert( err );
-  });
+//   $.ajax({
+//     method: 'GET',
+//     url: '/clearInput'
+//   }).then(function (response) {
+//       console.log(response);
+//     $('.num1').val('');
+//     $('.num2').val('');
+//   }).catch(function (err) {
+//     alert( err );
+//   });
 } //end clearInputs
 
 function displayAnswer(response) {

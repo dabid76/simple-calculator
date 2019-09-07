@@ -20,5 +20,6 @@
   "homepage": "https://github.com/dabid76/jquery-server-side-calculator#readme",
   "dependencies": {
     "express": "^4.17.1"
-  }
+  },
+  "devDependencies": {}
 }

@@ -30,10 +30,10 @@ app.get( '/addProblems', ( req, res ) => {
     res.send( numHistory );
 }) // end of app.get
 
-app.get( '/clearInput', ( req, res ) => {
-    console.log( 'in /clearInput GET' );
-    res.sendStatus(200);
-}) // end app.get
+// app.get( '/clearInput', ( req, res ) => {
+//     console.log( 'in /clearInput GET' );
+//     res.sendStatus(200);
+// }) // end app.get
 
 app.delete( '/addProblems', ( req, res ) => {
     console.log( ' in /addProblems delete', req.body );
