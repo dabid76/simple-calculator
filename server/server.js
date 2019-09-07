@@ -33,4 +33,4 @@ app.get( '/addProblems', ( req, res ) => {
 app.get( '/clearInput', ( req, res ) => {
     console.log( 'in /clearInput GET' );
     res.sendStatus(200);
-})
+}) // end app.get
