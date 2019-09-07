@@ -13,9 +13,8 @@ function onReady(){
     $( '#divideBtn' ).on( 'click', selectOp );
     $( '#equalBtn' ).on( 'click', calculate );
     $( '#refreshBtn' ).on( 'click', clearInputs );
-    // clearInputs();
+    $( '#deleteBtn' ).on( 'click', deleteAll );
     displayProblems();
-    // displayAnswer();
 } // end onReady
 
 function selectOp(){
@@ -89,3 +88,13 @@ function displayAnswer(response) {
     el.empty();
     el.append('<h3>' + response + '</h3>');
   } //end answer
+
+  function  deleteAll() {
+    console.log( 'delete Btn click' );
+    $.ajax({
+        type: 'delete',
+        url: '/problems'
+      }).then(function (response) {
+          console.log(response);
+      })
+}
