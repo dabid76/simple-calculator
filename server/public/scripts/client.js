@@ -50,10 +50,10 @@ function displayProblems() {
     }).then( function( response ){
         console.log( 'back from server with:', response );
         // display things on DOM
-        let outputElement = $('#numberOut');
-        outputElement.empty();
+        let el = $('#numberOut');
+        el.empty();
         for( let item of response){
-            outputElement.append( '<li>' + item.num1 + ' ' + item.operator + ' ' + item.num2 + '</li>');
+            el.append( '<li>' + item.num1 + ' ' + item.operator + ' ' + item.num2 + '</li>');
         } // end loop
     }).catch( function( err ){
         // catch errors here
@@ -76,7 +76,7 @@ function clearInputs() {
 
 function displayAnswer(response) {
     console.log('in answer');
-    let outputElement = $('#answer');
-    outputElement.empty();
-    outputElement.append('<h3>' + response + '</h3>');
+    let el = $('#answer');
+    el.empty();
+    el.append('<h3>' + response + '</h3>');
   } //end answer
