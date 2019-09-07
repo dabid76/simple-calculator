@@ -13,11 +13,14 @@ function onReady(){
     $( '#divideBtn' ).on( 'click', selectOp );
     $( '#equalBtn' ).on( 'click', calculate );
     $( '#refreshBtn' ).on( 'click', clearInputs );
+    // clearInputs();
+    displayProblems();
+    // displayAnswer();
 } // end onReady
 
 function selectOp(){
     operator = $(this).data('ops');
-    console.log(operator);
+    console.log('symbol', operator);
 }
 
 function calculate(event) {
@@ -33,7 +36,7 @@ let sendProblem = { num1: num1, operator: operator, num2: num2 };
         url: '/problems',
         data: sendProblem
     }).then( function( response ){
-        console.log( 'Yes!', response );
+        console.log( 'answer', response );
         displayAnswer(response);
         displayProblems();
     }).catch( function( err ){
@@ -67,6 +70,7 @@ function clearInputs() {
     method: 'GET',
     url: '/clearInput'
   }).then(function (response) {
+      console.log(response);
     $('.num1').val('');
     $('.num2').val('');
   }).catch(function (err) {
