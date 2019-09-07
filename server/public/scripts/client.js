@@ -31,6 +31,11 @@ function calculate(event) {
 
 let sendProblem = { num1: num1, operator: operator, num2: num2 };
 
+    if( num1 === '' || num2 === ''){
+        alert('Please fill out all the inputs');
+        return;
+    }
+
     $.ajax({
         type: 'POST',
         url: '/problems',
