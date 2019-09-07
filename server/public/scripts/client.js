@@ -26,14 +26,18 @@ function calculate(event) {
     num2 = $('.num2').val();
     console.log(num1 + ' ' + num2);
 
-let sendProblem = { 
-    num1: num1, 
-    operator: operator, 
-    num2: num2 
-};
+    let sendProblem = { 
+        num1: num1, 
+        operator: operator, 
+        num2: num2 
+    };
 
-    if( num1 === '' || num2 === '' ){
+    if( num1 === '' || num2 === '') {
         alert('Please fill out all the inputs');
+        return;
+    }
+    else if( operator == null) {
+        alert('Please select an operator');
         return;
     }
 
