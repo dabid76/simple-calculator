@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require( 'body-parser' );
 const port = 5000;
 
-let numbers = [];
+let numHistory = [];
 
 app.use( express.static( 'server/public' ));
 app.use( bodyParser.urlencoded( { extended: true } ) )
@@ -13,13 +13,24 @@ app.listen(port, () =>{
     
 }); // end server up
 
-app.get( '/numbers', ( req, res ) => {
-    console.log( 'in /cal GET' );
-    res.send( numbers );
-}) // end cal
+app.post( '/problems', ( req, res) => {
+    console.log( 'in /problems POST', req.body );
+    numHistory.push( req.body );
+    let num1 = req.body.num1;
+    let num2 = req.body.num2;
+    let operator = req.body.operator;
+    let answer = num1 + operator + num2;
+    console.log(answer);
+    answer = eval(answer);
+    res.send(String( answer ));
+}) // end of app.post
 
-app.post( '/numbers', ( req, res) => {
-    console.log( 'in /cal POST', req.body );
-    numbers.push( req.body );
-    res.send( numbers );
-}) // end things POST
+app.get( '/addProblems', ( req, res ) => {
+    console.log( 'in /problems GET' );
+    res.send( numHistory );
+}) // end of app.get
+
+app.get( '/clearInput', ( req, res ) => {
+    console.log( 'in /clearInput GET' );
+    res.sendStatus(200);
+})

@@ -4,74 +4,79 @@ console.log('js');
 
 $( document ).ready( onReady );
 
+let operator;
+
 function onReady(){
-    $( '#addBtn' ).on( 'click', add );
-    $( '#minusBtn' ).on( 'click', minus );
-    $( '#timesBtn' ).on( 'click', times );
-    $( '#divideBtn' ).on( 'click', divide );
-    // $( '#equalBtn' ).on( 'click', bodyInput );
-    // $( '#refreshBtn' ).on( 'click', refresh );
-    getNumbers();
+    $( '#addBtn' ).on( 'click', selectOp );
+    $( '#minusBtn' ).on( 'click', selectOp );
+    $( '#timesBtn' ).on( 'click', selectOp );
+    $( '#divideBtn' ).on( 'click', selectOp );
+    $( '#equalBtn' ).on( 'click', calculate );
+    $( '#refreshBtn' ).on( 'click', clearInputs );
+} // end onReady
+
+function selectOp(){
+    operator = $(this).data('ops');
+    console.log(operator);
 }
 
-function add(num1, num2){
-    $( '#equalBtn' ).on( 'click', bodyInput );
-   return num1 + num2;
-}
+function calculate(event) {
+    event.preventDefault;
+    num1 = $('.num1').val();
+    num2 = $('.num2').val();
+    console.log(num1 + ' ' + num2);
 
-function minus(num1, num2){
-    $( '#equalBtn' ).on( 'click', bodyInput );
-   return num1 - num2;
-}
+let sendProblem = { num1: num1, operator: operator, num2: num2 };
 
-function times(num1, num2){
-    $( '#equalBtn' ).on( 'click', bodyInput );
-   return num1 * num2;
-}
-
-function divide(num1, num2){
-    $( '#equalBtn' ).on( 'click', bodyInput );
-   return num1 / num2;
-}
-
-function bodyInput(){
-    let numbers = {
-        num1: $( '#firstN' ).val(),
-        num2: $( '#secondN' ).val()
-    }
     $.ajax({
         type: 'POST',
-        url: '/numbers',
-        data: numbers
+        url: '/problems',
+        data: sendProblem
     }).then( function( response ){
-        console.log( 'back from server with:', response );
-        getNumbers();
+        console.log( 'Yes!', response );
+        displayAnswer(response);
+        displayProblems();
     }).catch( function( err ){
         alert( err );
     }) // end POST
-    $( '#firstN' ).val(''),
-    $( '#secondN' ).val('')
-} // end bodyInput
+} // end calculate
 
-function getNumbers(){
+function displayProblems() {
+    console.log( 'in displayProblems');
     // use AJAX to make a GET request
     $.ajax({
         type: 'GET', 
-        url: '/numbers'
+        url: '/addProblems'
     }).then( function( response ){
-        // console log out response
         console.log( 'back from server with:', response );
         // display things on DOM
-        let el = $('#numberOut');
-        el.empty();
-        for( let i = 0; i< response.length; i++){
-            el.append( `
-            <li>${response[i].num1}</li>
-            <li>${response[i].num2}</li>`
-            );
+        let outputElement = $('#numberOut');
+        outputElement.empty();
+        for( let item of response){
+            outputElement.append( '<li>' + item.num1 + ' ' + item.operator + ' ' + item.num2 + '</li>');
         } // end loop
     }).catch( function( err ){
         // catch errors here
         alert( err ); 
     }) // end catch
-} // end getNumbers
+} // end displayProblems
+
+function clearInputs() {
+    console.log('in clearInputs,');
+  $.ajax({
+    method: 'GET',
+    url: '/clearInput'
+  }).then(function (response) {
+    $('.num1').val('');
+    $('.num2').val('');
+  }).catch(function (err) {
+    alert( err );
+  });
+} //end clearInputs
+
+function displayAnswer(response) {
+    console.log('in answer');
+    let outputElement = $('#answer');
+    outputElement.empty();
+    outputElement.append('<h3>' + response + '</h3>');
+  } //end answer

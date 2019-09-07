@@ -10,18 +10,23 @@
 </head>
 <body>
     <h1>Server Side Calculator</h1>
-    <div id="inputDiv">
-        <input type="number" placeholder="Enter Number" id="firstN">
-        <button id="addBtn"> + </button>
-        <button id="minusBtn"> - </button>
-        <button id="timesBtn"> * </button>
-        <button id="divideBtn"> / </button>
-        <input type="number" placeholder="Enter Number" id="secondN">
+    <div id="input">
+        <input type="number" class="num1" placeholder="Enter Number">
+        <button class="operator" id="addBtn" data-ops="+"> + </button>
+        <button class="operator" id="minusBtn" data-ops="-"> - </button>
+        <button class="operator" id="timesBtn" data-ops="*">*</button>
+        <button class="operator" id="divideBtn" data-ops="/">/</button>
+        <input type="number" class="num2" placeholder="Enter Number">
         <button id="equalBtn"> = </button>
         <button id="refreshBtn"> c </button>
     </div>
-    <ul id="numberOut">
-
-    </ul>
+    <div class="output">
+        <p>Answer:</p>
+        <h3 id="answer"></h3>
+    </div>
+    <div class="list">
+        <p>History:</p>
+        <ul id="numberOut"></ul>
+    </div>
 </body>
 </html>
