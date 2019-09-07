@@ -35,7 +35,8 @@ app.get( '/clearInput', ( req, res ) => {
     res.sendStatus(200);
 }) // end app.get
 
-app.delete( '/deleteNumbers', ( req, res ) => {
-    console.log( ' Deleta All History' );
-    res.send( 'wow' )
-})
+app.delete( '/addProblems', ( req, res ) => {
+    console.log( ' in /addProblems delete', req.body );
+    numHistory = [];
+    res.send( numHistory );
+}) // end app.delete

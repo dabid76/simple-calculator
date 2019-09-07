@@ -1,5 +1,3 @@
-// import { setupMaster } from "cluster";
-
 console.log('js');
 
 $( document ).ready( onReady );
@@ -28,9 +26,13 @@ function calculate(event) {
     num2 = $('.num2').val();
     console.log(num1 + ' ' + num2);
 
-let sendProblem = { num1: num1, operator: operator, num2: num2 };
+let sendProblem = { 
+    num1: num1, 
+    operator: operator, 
+    num2: num2 
+};
 
-    if( num1 === '' || num2 === ''){
+    if( num1 === '' || num2 === '' ){
         alert('Please fill out all the inputs');
         return;
     }
@@ -61,7 +63,9 @@ function displayProblems() {
         el.empty();
         for( let item of response){
             el.append( '<li>' + item.num1 + ' ' + item.operator + ' ' + item.num2 + '</li>');
-        } // end loop
+        }
+        console.log(el); 
+        // end loop
     }).catch( function( err ){
         // catch errors here
         alert( err ); 
@@ -87,14 +91,15 @@ function displayAnswer(response) {
     let el = $('#answer');
     el.empty();
     el.append('<h3>' + response + '</h3>');
-  } //end answer
+} //end answer
 
-  function  deleteAll() {
+function  deleteAll() {
     console.log( 'delete Btn click' );
     $.ajax({
         type: 'delete',
-        url: '/problems'
-      }).then(function (response) {
-          console.log(response);
-      })
-}
+        url: '/addProblems'
+    }).then(function (response) {
+        console.log(response);
+    })
+    displayProblems();
+} // end deleteAll
