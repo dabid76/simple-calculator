@@ -1,14 +1,14 @@
 const express =require( 'express' );
 const app = express();
 const bodyParser = require( 'body-parser' );
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 let numHistory = [];
 
 app.use( express.static( 'server/public' ));
 app.use( bodyParser.urlencoded( { extended: true } ) )
 
-app.listen(port, () =>{    
+app.listen(PORT, () =>{    
 }); // end server up
 
 app.post( '/problems', ( req, res) => {
